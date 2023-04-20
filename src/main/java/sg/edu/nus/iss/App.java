@@ -36,10 +36,10 @@ public class App
         //testing the Cookie class
         Cookie cookie = new Cookie();
         cookie.readCookieFile(fileName);
-        String myCookie = cookie.getRandomCookie();
-        System.out.println(myCookie);
-        String myCookie2 = cookie.getRandomCookie();
-        System.out.println(myCookie2);
+        // String myCookie = cookie.getRandomCookie();
+        // System.out.println(myCookie);
+        // String myCookie2 = cookie.getRandomCookie();
+        // System.out.println(myCookie2);
 
         //slide 8 - establishing connection
         ServerSocket ss = new ServerSocket(Integer.parseInt(port)); //convert string port to int
@@ -59,16 +59,17 @@ public class App
                 DataOutputStream dos = new DataOutputStream(bos);
                
                //write logic to recceive and send
-                while(msgReceived.equals("close")){
+                while(!msgReceived.equals("close")){
                     //slide 9 - receive message
                     msgReceived = dis.readUTF();
-                    if(msgReceived.equals("get-cookie")){
+                    if(msgReceived.equalsIgnoreCase("get-cookie")){
                         //get a random cookie
                         String randomCookie = cookie.getRandomCookie();
                      
 
                         //send the random cookie out using DataOutputStream (dos.writeUTF(XXXX))
                         dos.writeUTF(randomCookie);
+                        dos.flush(); //ALWAYS OUTPUT STREAM FLUSH TO SEND
                     }
                 } 
 
