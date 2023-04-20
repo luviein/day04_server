@@ -12,8 +12,8 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/**
- * Hello world!
+/** PUT THIS IN TERMINAL:
+ * c:\Users\tanye\OneDrive\Documents\Software Development Fundamentals\Day Four\day04_server\src\main\java\sg\edu\nus\iss>java sg.edu.nus.iss/App data\cookie.txt 5000 
  *
  */
 public class App 
@@ -32,6 +32,14 @@ public class App
             System.out.println("Cookie file not found!");
             System.exit(0); //0  to indicate successful termination
         }
+
+        //testing the Cookie class
+        Cookie cookie = new Cookie();
+        cookie.readCookieFile(fileName);
+        String myCookie = cookie.getRandomCookie();
+        System.out.println(myCookie);
+        String myCookie2 = cookie.getRandomCookie();
+        System.out.println(myCookie2);
 
         //slide 8 - establishing connection
         ServerSocket ss = new ServerSocket(Integer.parseInt(port)); //convert string port to int
@@ -55,9 +63,12 @@ public class App
                     //slide 9 - receive message
                     msgReceived = dis.readUTF();
                     if(msgReceived.equals("get-cookie")){
-                        //instantiate cookie.java
                         //get a random cookie
+                        String randomCookie = cookie.getRandomCookie();
+                     
+
                         //send the random cookie out using DataOutputStream (dos.writeUTF(XXXX))
+                        dos.writeUTF(randomCookie);
                     }
                 } 
 
