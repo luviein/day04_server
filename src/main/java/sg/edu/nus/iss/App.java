@@ -70,6 +70,9 @@ public class App
                         //send the random cookie out using DataOutputStream (dos.writeUTF(XXXX))
                         dos.writeUTF(randomCookie);
                         dos.flush(); //ALWAYS OUTPUT STREAM FLUSH TO SEND
+                    }else{
+                        dos.writeUTF("");
+                        dos.flush();
                     }
                 } 
 
